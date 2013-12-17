@@ -7,6 +7,7 @@ $bitcoin = new jsonRPCClient($connection_url);
 
 header('Content-Type: application/json');
 echo json_encode([
+    'address' => $bitcoin->getaccountaddress(''),
     'balance' => $bitcoin->getbalance(),
     'transactions' => $bitcoin->listtransactions()
 ]);

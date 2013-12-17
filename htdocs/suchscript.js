@@ -1,5 +1,5 @@
 (function () {
-    var dogerocket, total;
+    var dogerocket, total, address;
 
     function shake() {
         dogerocket.style.left = window.innerWidth * (1-(progress / target)) + Math.floor(Math.random() * 5 - 2) + 'px';
@@ -51,6 +51,11 @@
         total.appendChild(document.createTextNode(progress + '/' + target + 'DOGE'));
     }
 
+    function updateAddress (n) {
+        address.innerHTML = '';
+        address.appendChild(document.createTextNode(n));
+    }
+
     var seenTransactions = {}, firstCheck = true;
 
     function checkProgress () {
@@ -62,6 +67,7 @@
                     var data = JSON.parse(xhr.responseText);
                     progress = data.balance;
                     updateTotal();
+                    updateAddress(data.address);
                     data.transactions.forEach(function (transaction) {
                         if (!seenTransactions.hasOwnProperty(transaction.txid)) {
                             seenTransactions[transaction.txid] = null;
@@ -89,6 +95,7 @@
     window.onload = function () {
         dogerocket = document.getElementById('dogerocket');
         total = document.getElementById('total');
+        address = document.getElementById('address');
         window.setInterval(shake, 1000/15);
         randomSpawn();
         checkProgress();
