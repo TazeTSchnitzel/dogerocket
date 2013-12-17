@@ -85,8 +85,6 @@
     }
 
     function onprogress (x) {
-        progress += x;
-        updateTotal();
         spawnText('dogetext donationtext', 'much ' + x + 'DOGE donation many thank wow', 30000);
         if (progress > target)
             spawnText('dogetext donationtext', 'much doge hit moon many thank wow', 30000);
